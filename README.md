@@ -32,3 +32,29 @@
 - ### Role-Based Access Control:
 
   - Different access levels for users and admins
+
+## Steps to run server
+
+- ### To create virtual environment
+
+  ```
+  python3 -m venv venv
+  OR,
+  python -m venv venv
+
+  ```
+
+- ### Install dependencies/requirements
+
+  ` pip install requirements.txt`
+
+- ### To run server
+
+  `fastapi dev main.py`
+
+- ### All done! see log message server must had started now
+
+  - Api
+    [localhost:8080](localhost:8080)
+  - Api docs
+    [localhost:8080/docs](localhost:8080/docs)
