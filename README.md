@@ -40,7 +40,7 @@
   ```
 - ### Install dependencies/requirements
 
-  ` pip install requirements.txt`
+  ` pip install -r requirements.txt`
 - ### To run server
 
   `fastapi dev main.py`
