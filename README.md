@@ -38,6 +38,11 @@
   python -m venv venv
 
   ```
+- ### To start virtual environnment
+
+  ```
+  source ./venv/bin/activate
+  ```
 - ### Install dependencies/requirements
 
   ` pip install -r requirements.txt`
@@ -47,6 +52,6 @@
 - ### All done! see log message server must had started now
 
   - Api
-    [localhost:8000](localhost:8000)
+    [http://localhost:8000](http://localhost:8000)
   - Api docs
     [localhost:8000/docs](localhost:8000/docs)
