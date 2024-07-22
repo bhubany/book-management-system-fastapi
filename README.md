@@ -49,6 +49,20 @@
 - ### To run server
 
   `fastapi dev main.py`
+
+## Using shell script
+
+- ### Make file executable
+
+  ```
+   chmod +x start_server.sh
+
+  ```
+- ### Execute script
+
+  ```
+  ./start_server.sh
+  ```
 - ### All done! see log message server must had started now
 
   - Api
