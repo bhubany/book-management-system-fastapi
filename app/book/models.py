@@ -6,7 +6,6 @@ class Book(BaseModel):
     title: str
     author: str
     year: int
-    author: str
 
     class Config:
         orm_mode = True

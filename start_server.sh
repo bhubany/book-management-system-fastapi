@@ -3,8 +3,8 @@
 if [[ -z "$VIRTUAL_ENV" ]]; then
     echo "No virtual environment detected. Attempting to activate virtual environment..."
     # Activate virtual environment if it exists
-    if [ -d "venv" ]; then
-        source venv/bin/activate
+    if [ -d "env" ]; then
+        source ./env/bin/activate
         echo "Virtual environment activated."
     else
         echo "No virtual environment found. Please set up a virtual environment."

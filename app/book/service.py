@@ -1,45 +1,28 @@
-from typing import Annotated
 from .models import Book
-from fastapi import Depends
-import config.models as models
-from config.database import engine, SessionLocal
-from sqlalchemy.orm import Session
+from . import repository
+import logging
 
-models.Base.metadata.create_all(bind=engine)
-
-
-def get_db():
-    db = SessionLocal()
-    print(db)
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-db_dependency = Annotated[Session, Depends(get_db)]
-
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 class BookService:
-    def __init__(self):
-        self.database = db_dependency
-
-    def save(self, data: Book, db: Session) -> dict:
-        book = models.Books(name=data.author)
-        db.add(book)
-        db.commit()
-        db.refresh(book)
+    def save(self, data: Book) -> dict:
+        print("################ from save of")
+        book = repository.save(data)
         print(f"Book saved with details: {book}")
+        logger.info(book)
         return book
-        # return data
 
-    def get(self, id: str, db: Session) -> dict:
-        # book = Book.get(id)
-        print(f"Book retrieved with details: {id}")
+    def get(self, id: str) -> dict:
+        book = Book.objects.get(id=id)
+        if not book:
+            return {"error": "Book not found"}
+
+        print(f"Book retrieved with details: {book}")
         return {
-            "id": id,
-            "title": "The Great Gatsby",
-            "author": "F. Scott Fitzgerald",
-            "year": 1925,
-            "isbn": "978-0-14-118116-4"
+            "id": book.id,
+            "title": book.title,
+            "author": book.author,
+            "year": book.year,
+            "isbn": book.isbn
         }
