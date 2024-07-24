@@ -1,20 +1,27 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from .service import BookService
-from .models import Book
+from .models import BookRequest, BookResponse
+from uuid import UUID
+from typing import List
 
 
 class BookRouter:
     def __init__(self):
         self.service = BookService()
         self.router = APIRouter()
-        self.router.post("/", response_model=Book)(self.save_book)
-        self.router.get("/{book_id}", response_model=Book)(self.get_book)
+        self.router.post("/", response_model=BookResponse)(self.save)
+        self.router.get("/{book_id}", response_model=BookResponse)(self.find_by_id)
+        self.router.get("/all", response_model=List[BookResponse])(self.find_all)
 
-    def save_book(self, book_data: Book) -> Book:
+
+    def save(self, book_data: BookRequest) -> BookResponse:
         return self.service.save(book_data)
 
-    def get_book(self, book_id: str) -> Book:
-        return self.service.get(book_id)
+    def find_by_id(self, book_id: UUID) -> BookResponse:
+        return self.service.find_by_id(book_id)
+    
+    def find_all(self) -> List[BookResponse]:
+        return self.service.find_all()
 
 
 book_router = BookRouter().router

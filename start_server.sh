@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z "$VIRTUAL_ENV" ]]; then
-    echo "No virtual environment detected. Attempting to activate virtual environment..."
+    echo "No active virtual environment detected. Attempting to activate virtual environment..."
     # Activate virtual environment if it exists
     if [ -d "env" ]; then
         source ./env/bin/activate

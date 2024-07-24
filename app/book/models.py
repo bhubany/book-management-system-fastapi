@@ -1,14 +1,12 @@
 from pydantic import BaseModel
+from uuid import UUID
 
 
-class Book(BaseModel):
-    id: str
+class BookRequest(BaseModel):
     title: str
     author: str
     year: int
 
-    class Config:
-        orm_mode = True
 
-    def dump(self):
-        return self.model_dump()
+class BookResponse(BookRequest):
+    id: UUID

@@ -1,28 +1,23 @@
-from .models import Book
-from . import repository
+from .models import BookRequest, BookResponse
+from .repository import BookRepository 
 import logging
+from uuid import UUID
+from typing import List
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class BookService:
-    def save(self, data: Book) -> dict:
-        print("################ from save of")
-        book = repository.save(data)
-        print(f"Book saved with details: {book}")
+    def __init__(self):
+        self.repository = BookRepository()
+
+    def save(self, data: BookRequest) -> BookResponse:
+        book = self.repository.save(data)
         logger.info(book)
         return book
 
-    def get(self, id: str) -> dict:
-        book = Book.objects.get(id=id)
-        if not book:
-            return {"error": "Book not found"}
-
-        print(f"Book retrieved with details: {book}")
-        return {
-            "id": book.id,
-            "title": book.title,
-            "author": book.author,
-            "year": book.year,
-            "isbn": book.isbn
-        }
+    def find_by_id(self, id: UUID) -> BookResponse:
+        return self.repository.find_by_id(id)
+    
+    def find_all(self):
+        return self.repository.find_all()

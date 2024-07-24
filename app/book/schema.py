@@ -1,16 +1,9 @@
 from sqlmodel import SQLModel, Field
-
+from uuid import uuid4, UUID 
 
 class Book(SQLModel, table=True):
-    id: int = Field(primary_key=True, index=True)
+    id: UUID = Field(default_factory= uuid4,primary_key=True, index=True)
     title: str
     author: str
     year: int
     
-
-
-# class Category(SQLModel, table=True):
-#     id: int = Field(primary_key=True, index=True)
-#     name: str = Field(index=True)
-#     # book_id = Field( ForeignKey('books.id'))
-#     is_correct = Field(default=False)

@@ -1,12 +1,14 @@
 from book.routes import book_router
 from fastapi import FastAPI, status
 from utils.response import ApiResponse
+from configuration.database_config import create_tables
 
 app = FastAPI()
 
-
+create_tables()
 
 app.include_router(book_router)
+
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
