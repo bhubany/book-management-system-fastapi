@@ -68,4 +68,4 @@
   - Api
     [http://localhost:8000](http://localhost:8000)
   - Api docs
-    [localhost:8000/docs](localhost:8000/docs)
+    [localhost:8000/docs](http://localhost:8000/docs)
