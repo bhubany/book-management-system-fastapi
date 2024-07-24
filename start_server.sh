@@ -16,4 +16,4 @@ fi
 
 # Start the FastAPI application
 echo "Starting FastAPI application..."
-fastapi dev app/main.py
+fastapi dev src/main.py

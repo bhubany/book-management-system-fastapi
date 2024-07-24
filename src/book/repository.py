@@ -1,5 +1,5 @@
 from sqlmodel import Session, select 
-from .schema import Book
+from book.schemas import Book
 from uuid import uuid4, UUID
 from configuration.database_config import engine
 
@@ -22,6 +22,6 @@ class BookRepository():
             return book
     
     def find_all(self):
-        with Session(engine) as session:
+        with self.session as session:
             books = session.exec(select(Book)).all()
             return books

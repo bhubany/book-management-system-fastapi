@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from .service import BookService
-from .models import BookRequest, BookResponse
+from book.service import BookService
+from book.models import BookRequest, BookResponse
 from uuid import UUID
 from typing import List
 
@@ -11,7 +11,7 @@ class BookRouter:
         self.router = APIRouter()
         self.router.post("/", response_model=BookResponse)(self.save)
         self.router.get("/{book_id}", response_model=BookResponse)(self.find_by_id)
-        self.router.get("/all", response_model=List[BookResponse])(self.find_all)
+        self.router.get("", response_model=List[BookResponse])(self.find_all)
 
 
     def save(self, book_data: BookRequest) -> BookResponse:
