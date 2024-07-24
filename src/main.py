@@ -1,12 +1,13 @@
 from book.router import book_router
 from fastapi import FastAPI, status
 from utils.response import ApiResponse
-from configuration.database_config import create_tables
+from config.database_config import create_tables
 
 app = FastAPI()
 
 create_tables()
 
+# Routes
 app.include_router(book_router, prefix="/books")
 
 

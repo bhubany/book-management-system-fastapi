@@ -1,7 +1,7 @@
 from sqlmodel import Session, select 
 from book.schemas import Book
 from uuid import uuid4, UUID
-from configuration.database_config import engine
+from config.database_config import engine
 
 
 class BookRepository():
