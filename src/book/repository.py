@@ -3,10 +3,9 @@ from book.schemas import Book
 from uuid import uuid4, UUID
 from config.database_config import engine
 
-
 class BookRepository():
     def __init__(self):
-        self.session = Session(engine)
+        self.session:Session = Session(engine)  
 
     def save(self, data: Book):
         with  self.session as session:
