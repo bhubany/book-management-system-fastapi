@@ -6,12 +6,13 @@ from contextlib import asynccontextmanager
 
 
 # init db and create tables
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    create_tables()
-    yield
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     create_tables()
+#     yield
+# app = FastAPI(lifespan=lifespan)
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 # Routes
 app.include_router(book_router, prefix="/books")
