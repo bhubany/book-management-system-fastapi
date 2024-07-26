@@ -3,3 +3,8 @@
 3. SSO and other authentication
 4. Filter and middleware
 5. Validations
+6. S3 integration
+7. Email integration: SES, SENDGRID
+
+
+Enhancement: follow same format of logging
