@@ -1,6 +1,6 @@
 from book.router import book_router
 from fastapi import FastAPI, status
-from utils.response import ApiResponse
+from common.dto.response import ApiResponse
 from config.database_config import create_tables
 from contextlib import asynccontextmanager
 
@@ -16,7 +16,6 @@ app = FastAPI()
 
 # Routes
 app.include_router(book_router, prefix="/books")
-
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
