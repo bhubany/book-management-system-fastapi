@@ -10,7 +10,7 @@ class BookService:
         self.repository = BookRepository()
         self.logger = get_logger(__name__)
 
-    def save(self, data: BookRequest) -> BookResponse:
+    def save(self, data: BookRequest):
         book = self.repository.save(data)
         self.logger.info("Book saved successfully")
         return book
