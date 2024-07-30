@@ -1,4 +1,4 @@
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from typing import Dict, TypeVar, Generic, Optional
 from pydantic import BaseModel
 
@@ -14,15 +14,16 @@ class Error(BaseModel):
     support_message: str
 
 
-class __AppResponse(BaseModel, Generic[T]):
+class ApiResponse(BaseModel, Generic[T]):
     """Base model for app responses."""
     data: Optional[T]
     error: Error | None = None
     status_code: int = 200
 
 
-class ApiResponse(JSONResponse):
-    def __init__(self, status: int, data: Generic[T] = None, error: Error = None, headers: Dict[str, str] = None):
-        response = __AppResponse(
-            status_code=status, data=data, error=error).model_dump()
-        super.__init__(content=response, status_code=status, headers=headers)
+# class ApiResponse(BaseModel, Generic[T]):
+
+#     def __init__(self, status: int, data: Optional[T] = None, error: Error = None, headers: Dict[str, str] = None):
+#         response = AppResponse(
+#             status_code=status, data=data, error=error).model_dump()
+#         super().__init__(content=response, status_code=status, headers=headers)
