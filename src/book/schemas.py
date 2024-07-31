@@ -1,11 +1,12 @@
-from sqlmodel import SQLModel, Field
-from uuid import uuid4, UUID 
-from datetime import datetime, timezone
+from pydantic import BaseModel
+from uuid import UUID
 
-class Book(SQLModel, table=True):
-    id: UUID = Field(default_factory= uuid4,primary_key=True, index=True)
+
+class BookRequest(BaseModel):
     title: str
     author: str
     year: int
-    created_at: datetime | None = Field(default_factory= lambda:datetime.now(timezone.utc))
-    
+
+
+class BookResponse(BookRequest):
+    id: UUID

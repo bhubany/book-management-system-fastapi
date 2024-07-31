@@ -1,9 +1,9 @@
 from fastapi import APIRouter
-from book.service import BookService
-from book.models import BookRequest, BookResponse
 from uuid import UUID
 from typing import List
-from common.schemas.response import SuccessResponse, AppResponse
+from src.book.service import BookService
+from src.book.schemas import BookRequest, BookResponse
+from src.common.schemas.response import SuccessResponse, AppResponse
 
 
 class BookRouter:

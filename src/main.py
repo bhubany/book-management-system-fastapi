@@ -1,9 +1,10 @@
-from book.router import book_router
 from fastapi import FastAPI, status
-from common.schemas.response import ApiResponse
-from config.database_config import create_tables
-from contextlib import asynccontextmanager
+from src.book.router import book_router
+from src.common.schemas.response import SuccessResponse, AppResponse
+from src.config.database_config import create_tables
+from typing import Any
 
+'''No need to create tables manually as we have already used alembic for migrations. so commenting this code'''
 
 # init db and create tables
 # @asynccontextmanager
@@ -18,6 +19,6 @@ app = FastAPI()
 app.include_router(book_router, prefix="/books")
 
 
-@app.get("/", status_code=status.HTTP_200_OK)
-def read_root():
-    return ApiResponse(status=200, data={"name": "full name"})
+@app.get("/health", response_model=AppResponse[Any])
+def health():
+    return SuccessResponse(data={"message": "Server is up and healthy !"})

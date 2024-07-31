@@ -1,8 +1,8 @@
-from book.models import BookRequest, BookResponse
-from book.repository import BookRepository
 from uuid import UUID
 from typing import List
-from logger.config import get_logger
+from src.logger.config import get_logger
+from src.book.schemas import BookRequest, BookResponse
+from src.book.repository import BookRepository
 
 
 class BookService:

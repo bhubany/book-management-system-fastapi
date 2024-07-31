@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 import logging
-from config.settings import Settings
+from src.config.settings import Settings
 import json
 
 settings = Settings()
