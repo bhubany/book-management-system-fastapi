@@ -7,6 +7,7 @@
 7. Email integration: SES, SENDGRID
 8. Production setup
 9. Input Validations
+10. create BaseModel/BaseEntity class for common field
 
 
 Enhancement: follow same format of logging
