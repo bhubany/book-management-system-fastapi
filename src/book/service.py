@@ -1,23 +1,36 @@
 from uuid import UUID
 from typing import List
-from src.logger.config import get_logger
 from src.book.schemas import BookRequest, BookResponse
 from src.book.repository import BookRepository
+from src.book.models import Book
+from src.common.schemas.generic_success import GenericSuccess
 
 
 class BookService:
     def __init__(self):
         self.repository = BookRepository()
-        self.logger = get_logger(__name__)
 
-    def save(self, data: BookRequest):
-        book = self.repository.save(data)
-        self.logger.info("Book saved successfully")
-        return book
+    def save(self, data: BookRequest) -> BookResponse:
+        book = Book(
+            title=data.title,
+            author=data.author,
+            description=data.description,
+            publisher=data.publisher,
+            published_date=data.published_date,
+            isbn=data.isbn,
+            page_count=data.page_count,
+            cover_url=data.cover_url,
+            language=data.language,
+            book_type=data.book_type,
+            status=data.status,
+            condition=data.condition,
+            price=data.price,
+        )
+        res: Book = self.repository.save(book)
+        return GenericSuccess(success=res is not None)
 
     def find_by_id(self, id: UUID) -> BookResponse:
         return self.repository.find_by_id(id)
 
     def find_all(self) -> List[BookResponse]:
-        self.logger.info("All books fetched successfully")
         return self.repository.find_all()

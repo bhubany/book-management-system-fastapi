@@ -4,6 +4,7 @@ from typing import List
 from src.book.service import BookService
 from src.book.schemas import BookRequest, BookResponse
 from src.common.schemas.response import SuccessResponse, AppResponse
+from src.common.schemas.generic_success import GenericSuccess
 
 
 class BookRouter:
@@ -11,13 +12,13 @@ class BookRouter:
         self.service = BookService()
         self.router = APIRouter()
         self.router.post(
-            "", response_model=AppResponse[BookResponse])(self.save)
+            "", response_model=AppResponse[GenericSuccess])(self.save)
         self.router.get(
             "/{book_id}", response_model=AppResponse[BookResponse])(self.find_by_id)
         self.router.get("", response_model=AppResponse[List[BookResponse]])(
             self.find_all)
 
-    def save(self, book_data: BookRequest) -> SuccessResponse[BookResponse]:
+    def save(self, book_data: BookRequest) -> SuccessResponse[GenericSuccess]:
         return SuccessResponse(data=self.service.save(book_data))
 
     def find_by_id(self, book_id: UUID) -> SuccessResponse[BookResponse]:

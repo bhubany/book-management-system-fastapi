@@ -22,13 +22,13 @@ class AppResponse(BaseModel, Generic[T]):
 
 
 class ApiResponse(Response, Generic[T]):
-    def __init__(self, status_code: int = status.HTTP_200_OK, data: Optional[T] = None, error: Optional[Error] = None, headers: Dict[str, Any] = None):
+    def __init__(self, status_code: int = status.HTTP_200_OK, data: Optional[T] = None, error: Optional[Error] = None, headers: Optional[Dict[str, Any]] = None):
         response = AppResponse(data=data, error=error)
         super().__init__(content=response.model_dump_json(), status_code=status_code,
                          headers=headers, media_type="application/json")
 
 
 class SuccessResponse(Response, Generic[T]):
-    def __init__(self, data: Optional[T] = None, headers: Dict[str, Any] = None):
+    def __init__(self, data: Optional[T] = None, headers: Optional[Dict[str, Any]] = None):
         super().__init__(content=AppResponse(data=data).model_dump_json(), status_code=status.HTTP_200_OK,
                          headers=headers, media_type="application/json")

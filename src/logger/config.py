@@ -1,9 +1,9 @@
 from datetime import datetime, timezone
 import logging
-from src.config.settings import Settings
+from src.config.settings import get_settings
 import json
 
-settings = Settings()
+settings = get_settings()
 
 
 class JsonFormatter(logging.Formatter):
