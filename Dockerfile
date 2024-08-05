@@ -1,15 +1,15 @@
-FROM python:3.10-alpine 
+FROM python:3.10-slim 
 
 WORKDIR /app
 
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
-
-RUN python -m venv env
-
-RUN source env/bin/activate 
-
-RUN pip install -r requirements.txt
 
 RUN chmod +x ./entry_point.sh
 
-ENTRYPOINT [ "./entry_point.sh" ]
+EXPOSE 80
+
+CMD ["./entry_point.sh" ]
