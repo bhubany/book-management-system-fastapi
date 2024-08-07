@@ -32,3 +32,9 @@ class SuccessResponse(Response, Generic[T]):
     def __init__(self, data: Optional[T] = None, headers: Optional[Dict[str, Any]] = None):
         super().__init__(content=AppResponse(data=data).model_dump_json(), status_code=status.HTTP_200_OK,
                          headers=headers, media_type="application/json")
+
+
+class ErrorResponse(Response, Generic[T]):
+    def __init__(self, error: Error, http_status: str = "BAD REQUEST", status_code: status = status.HTTP_400_BAD_REQUEST,  headers: Optional[Dict[str, Any]] = None):
+        super().__init__(content=AppResponse(status=http_status, error=error).model_dump_json(), status_code=status_code,
+                         headers=headers, media_type="application/json")
