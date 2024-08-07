@@ -1,4 +1,4 @@
-1. Write Migration scripts for db
+1. Write Migration scripts for db: Done
 2. RBAC
 3. SSO and other authentication
 4. Filter and middleware
@@ -8,6 +8,7 @@
 8. Production setup
 9. Input Validations
 10. create BaseModel/BaseEntity class for common field
+11. Setup for staging and production
 
 
 Enhancement: follow same format of logging

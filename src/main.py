@@ -4,6 +4,7 @@ from src.common.schemas.response import SuccessResponse, AppResponse
 from src.config.database_config import init_db
 from contextlib import asynccontextmanager
 from typing import Any
+from src.common.exceptions.handler import exception_handlers
 
 '''No need to create tables manually as we have already used alembic for migrations. so commenting this code'''
 
@@ -18,6 +19,11 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 # app = FastAPI()
+
+
+# registering exception handlers to app
+for exc_class, handler in exception_handlers:
+    app.add_exception_handler(exc_class, handler)
 
 # Routes
 app.include_router(book_router, prefix="/books")
