@@ -9,5 +9,6 @@ class BaseModel(SQLModel):
     created_at: Optional[datetime] = Field(
         default_factory=lambda: datetime.now(tz.utc))
     created_by: Optional[UUID] = Field(default=None, nullable=True)
-    updated_at: Optional[datetime] = Field(default=None, nullable=True)
+    updated_at: Optional[datetime] = Field(
+        default_factory=lambda: datetime.now(tz.utc))
     updated_by: Optional[UUID] = Field(default=None, nullable=True)
