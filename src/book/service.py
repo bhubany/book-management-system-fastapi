@@ -1,9 +1,10 @@
 from uuid import UUID
-from typing import List
+from typing import List, Optional
 from src.book.schemas import BookRequest, BookResponse
 from src.book.repository import BookRepository
 from src.book.models import Book
 from src.common.schemas.generic_success import GenericSuccess
+from src.common.schemas.paginated_response import PaginatedResponse
 
 
 class BookService:
@@ -34,3 +35,6 @@ class BookService:
 
     def find_all(self) -> List[BookResponse]:
         return self.repository.find_all()
+
+    def find_paginated(self, page: Optional[int], limit: Optional[int]) -> PaginatedResponse[List[BookResponse]]:
+        return self.repository.find_paginated(page, limit)
