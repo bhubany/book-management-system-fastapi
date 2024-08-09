@@ -1,13 +1,13 @@
+from sqlmodel import Relationship, Field
 from src.common.models.baseModel import BaseModel
-from src.user.enums import UserStatus
-from sqlmodel import Relationship
 
 
 class User(BaseModel, table=True):
     __tablename__ = "users"
-    status: UserStatus
-    first_name: str
-    address: str
+    status: str = Field(index=True, nullable=False)
+    first_name: str = Field(index=True, nullable=False)
+    last_name: str = Field(index=True, nullable=False)
+    address: str = Field(nullable=True)
     authentication: "Authentication" = Relationship(
         back_populates="authentications")
 

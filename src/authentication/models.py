@@ -7,7 +7,6 @@ from uuid import UUID
 
 class Authentication(BaseModel, table=True):
     __tablename__ = "authentications"
-
     username: str = Field(index=True, unique=True)
     email: str = Field(index=True, unique=True)
     password: str = Field()

@@ -1,9 +1,10 @@
-from fastapi import FastAPI, status
-from src.book.router import book_router
-from src.common.schemas.response import SuccessResponse, AppResponse
-from src.config.database_config import init_db
+from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from typing import Any
+from src.book.router import book_router
+from src.user.router import user_router
+from src.common.schemas.response import SuccessResponse, AppResponse
+from src.config.database_config import init_db
 from src.common.exceptions.handler import exception_handlers
 
 '''No need to create tables manually as we have already used alembic for migrations. so commenting this code'''
@@ -27,6 +28,7 @@ for exc_class, handler in exception_handlers:
 
 # Routes
 app.include_router(book_router, prefix="/books")
+app.include_router(user_router, prefix="/users")
 
 
 @app.get("/health", response_model=AppResponse[Any])

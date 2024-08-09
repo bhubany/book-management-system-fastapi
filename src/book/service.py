@@ -11,7 +11,7 @@ class BookService:
     def __init__(self):
         self.repository = BookRepository()
 
-    def save(self, data: BookRequest) -> BookResponse:
+    def save(self, data: BookRequest) -> GenericSuccess:
         book = Book(
             title=data.title,
             author=data.author,
