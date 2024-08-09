@@ -1,16 +1,16 @@
 from fastapi import Depends
 from src.config.database_config import engine
 from sqlmodel import Session, select, func
-from src.user.models import User
+from src.authentication.models import Authentication
 
 
-class UserRepostiory:
+class AuthenticationRepository:
     def __init__(self):
         self.session: Session = Session(engine)
 
-    def save(self, user: User) -> User:
+    def save(self, auth: Authentication) -> Authentication:
         with self.session as session:
-            session.add(user)
+            session.add(auth)
             session.commit()
-            session.refresh(user)
-            return user
+            session.refresh(auth)
+            return auth
