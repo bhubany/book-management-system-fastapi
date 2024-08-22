@@ -7,6 +7,8 @@ from src.authentication.service import AuthenticationService
 from src.authentication.schemas import AuthenticationRequest
 from src.user.enums import UserStatus
 from src.common.enums.provider import Provider
+from typing import List, Optional
+from src.common.schemas.paginated_response import PaginatedResponse
 
 
 class UserService:
@@ -22,7 +24,6 @@ class UserService:
             last_name="",
             address=None,
         )
-        print(user)
         res = self.repository.save(user)
 
         authRequest = AuthenticationRequest(
@@ -30,7 +31,11 @@ class UserService:
             email=data.email,
             password=data.password,
             provider=Provider.LOCAL,
+            username=data.email
         )
 
         authRes = self.authenticationService.save(authRequest)
         return GenericSuccess(success=authRes is not None)
+
+    def find_paginated(self, page: Optional[int], limit: Optional[int]) -> PaginatedResponse[List[User]]:
+        return self.repository.find_paginated(page, limit)

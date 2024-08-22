@@ -12,4 +12,4 @@ class Authentication(BaseModel, table=True):
     password: str = Field()
     provider: Provider = Field(sa_column_kwargs={"default": Provider.LOCAL})
     user_id: UUID = Field(foreign_key="users.id")
-    user: "User" = Relationship(back_populates="users")
+    user: User = Relationship(back_populates="authentication")
